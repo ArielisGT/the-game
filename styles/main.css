@@ -4,7 +4,10 @@
 
 body {
   font-size: 100%;
-  background-color: aqua;
+  background-color: black;
+  color: white;
+  font-family: 'Saira Condensed', sans-serif;
+  background-image: url('/imgs/nebula1920x1080.jpg');
 }
 img {
   display: block;
@@ -13,4 +16,14 @@ img {
 }
 picture {
   display: block;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80vw;
+  height: 100vh;
+  margin: 0 auto;
+  padding: 1.5rem;
 }
