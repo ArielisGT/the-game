@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ariel Gonzalez Tumasonis | Ultimate Pong 1.0</title>
+    <title>Ariel | Ultimate Pong 1.0</title>
     <link rel="stylesheet" href="./styles/normalize.css" />
     <link rel="stylesheet" href="./styles/main.css" />
     <link
@@ -12,10 +12,29 @@
     />
   </head>
   <body>
-    <div class="container">
+    <header>
       <h1>Ultimate Pong 1.0</h1>
-      <img src="./imgs/mockup2.png" alt="" srcset="" />
+    </header>
+    <div class="container">
+      <div class="players">
+        <h2 class="player01">Player 01</h2>
+        <div class="line"></div>
+        <h2 class="player02">Player 02</h2>
+      </div>
+      <div class="court-container">
+        <div class="field">
+          <div class="ball"></div>
+          <div class="paddle01"></div>
+          <div class="paddle02"></div>
+        </div>
+      </div>
+      <div class="score">
+        <h2 class="counter01">01</h2>
+        <h3>SCORE</h3>
+        <h2 class="counter02">02</h2>
+      </div>
     </div>
+
     <script src="./scripts/index.js"></script>
   </body>
 </html>
