@@ -30,18 +30,85 @@ const addPlayer01 = (index) => units[index].classList.add('paddle01');
 const removePlayer01 = (index) => units[index].classList.remove('paddle01');
 const addPlayer02 = (index) => units[index].classList.add('paddle02');
 const removePlayer02 = (index) => units[index].classList.remove('paddle02');
-const ball = (index) => units[index].classList.add('ball');
+const addBall = (index) => units[index].classList.add('ball');
+const removeBall = (index) => units[index].classList.remove('ball');
+const moveFwBall = (index) => units[index].classList.add('move-fw');
+const removeFwBall = (index) => units[index].classList.remove('move-fw');
 
-/* const canImove = (position) => {
-  if (pared.includes(position)) {
+//Definimos una función para que evalue si se puede seguir moviendo la bola
+const blockBall = (position) => {
+  if (units.includes(position)) {
+    return false;
+  } else {
+    return true;
+  }
+};
+
+addBall(ballPosition);
+addPlayer01(paddlePosition01);
+addPlayer02(paddlePosition02);
+
+/*     case 'ArrowLeft':
+      if (x > 0) {
+        // calculo nueva posicion
+        const newPosition = pacmanPosition - 1;
+        // evaluo si me puedo mover a esa posicion
+        if (canImove(newPosition)) {
+          // si me puedo mover a esa posicion me muevo
+          pacmanPosition = newPosition;
+        }
+      }
+      break; */
+
+const spacePress = (event) => {
+  const { key } = event;
+  const yBall = Math.floor(ballPosition / 10);
+
+  if (yBall > 0) {
+    removeBall(ballPosition);
+    removeFwBall(ballPosition);
+    const newPosition = ballPosition + 10;
+    if (blockBall(newPosition)) {
+      ballPosition = newPosition;
+      moveFwBall(newPosition);
+    }
+  }
+}; /*   if (yBall > 0) {
+    moveFwBall(ballPosition);
+  } else if (yBall > 99) {
+    moveBwBall(ballPosition);
+  }
+ */ /*   if (yBall > 0) {
+    ballPosition = ballPosition + 10;
+    addBall(ballPosition);
+  } else {
+    ballPosition = ballPosition;
+  }
+ */ //Definimos una función para que evalue si se puede seguir moviendo la bola
+
+/*   units.forEach(element => {
+    
+    if (yBall > 0) {
+      const newPosition = ballPosition + 1;
+      addBall(ballPosition);
+    }
+   });
+ */ /* const blockBall = (position) => {
+  if (units.includes(position)) {
     return false;
   } else {
     return true;
   }
 }; */
-
-addPlayer01(paddlePosition01);
-addPlayer02(paddlePosition02);
+/* const moveBall = (position) => {
+  if (ballPosition > 0) {
+    const newPosition = ballPosition + 1;
+    if (blockBall(newPosition)) {
+      ballPosition = newPosition;
+    }
+  }
+  moveBall(ballPosition);
+}; */
 
 const handleKeyPress = (event) => {
   const { key } = event;
@@ -52,6 +119,7 @@ const handleKeyPress = (event) => {
 
   removePlayer01(paddlePosition01);
   removePlayer02(paddlePosition02);
+
   switch (key) {
     case 'a':
       if (xPaddle01 > 0) {
@@ -93,4 +161,5 @@ const handleKeyPress = (event) => {
   addPlayer02(paddlePosition02);
 };
 
-window.addEventListener('keyup', handleKeyPress);
+window.addEventListener('keydown', spacePress);
+window.addEventListener('keydown', handleKeyPress);

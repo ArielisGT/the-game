@@ -93,8 +93,24 @@ picture {
   height: 1vw;
   border-radius: 50%;
   background-color: yellow;
-  position: absolute;
 }
+.move-fw {
+  width: 1vw;
+  height: 1vw;
+  border-radius: 50%;
+  background-color: yellow;
+
+  transform: translateY(1vw);
+}
+.move-bw {
+  width: 1vw;
+  height: 1vw;
+  border-radius: 50%;
+  background-color: yellow;
+  transition: linear 1s;
+  transform: translateY(-1vw);
+}
+
 .paddle01 {
   width: 2vw;
   height: 1vw;
