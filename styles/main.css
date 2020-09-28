@@ -82,7 +82,7 @@ picture {
 }
 .cell {
   width: 2vw;
-  height: 1.7vw;
+  height: 3vw;
   border: 1px solid rgba(255, 255, 255, 0.5);
   color: white;
   font-size: 0.5rem;
@@ -96,19 +96,17 @@ picture {
   position: absolute;
 }
 .paddle01 {
-  width: 4vw;
+  width: 2vw;
   height: 1vw;
   border-radius: 2px;
   background-color: rgb(5, 145, 35);
-  position: absolute;
-  top: 2.5%;
+  top: 5%;
 }
 .paddle02 {
-  width: 4vw;
+  width: 2vw;
   height: 1vw;
   border-radius: 2px;
   background-color: rgb(189, 115, 5);
-  position: absolute;
   bottom: 2.5%;
 }
 
