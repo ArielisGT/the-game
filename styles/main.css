@@ -53,7 +53,7 @@ picture {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 30%;
+  width: 25vw;
   height: 90%;
   background-color: white;
   background-color: rgba(7, 92, 204, 0.5);
@@ -75,8 +75,13 @@ picture {
   background-position: center;
   background-size: contain;
   border-radius: 5px;
-  border-left: 0.75vw solid white;
-  border-right: 0.75vw solid white;
+  border-left: 1vw solid white;
+  border-right: 1vw solid white;
+}
+.cell {
+  width: 1vw;
+  height: 1vw;
+  border: 1px solid rgba(0, 0, 0, 0.5);
 }
 .ball {
   width: 1vw;
