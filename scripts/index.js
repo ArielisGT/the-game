@@ -1,12 +1,36 @@
+//Nueva lógica
+//Crear objetos paddles y pelota
+const paddle01 = {
+  width: 4,
+  height: 1,
+  x: 0,
+  y: 0,
+  speed: 1,
+}
+const paddle02 = {
+  width: 4,
+  height: 1,
+  x: 0,
+  y: 0,
+  speed: 1,
+};
+const ball = {
+  width: 1,
+  height: 1,
+  x: 200,
+  y: 200,
+  speed: 1,
+};
+
+
+
+//Lógica anterior
 // Definir celdas del field
 
 const width = 10;
 const height = 10;
-
 const area = width * height;
-
 const field = document.querySelector('.field');
-
 const units = [];
 
 for (let index = 0; index < area; index++) {
@@ -17,7 +41,6 @@ for (let index = 0; index < area; index++) {
   field.appendChild(cell);
   units.push(cell);
 }
-
 //- Setear teclas de movimiento de paddles
 //Selecciono el paddle del jugador 01
 /* const player01 = document.querySelector('.paddle01');
