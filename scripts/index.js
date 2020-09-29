@@ -128,7 +128,6 @@ function movingBall() {
           ballPosition = ballPosition - 11;
           console.log(ballPosition);
           addBall(ballPosition);
-          
         }
         if (ballPosition >= 90) {
           removeBall(ballPosition);
@@ -155,7 +154,7 @@ function movingBall() {
       if (ballDirection === 'forwards') {
         moveForwards();
         if (ballPosition === paddlePosition02) {
-          ballAngle = + 1;
+          ballAngle = +1;
           ballDirection = 'backwards';
           removeBall(ballPosition);
           ballPosition = ballPosition - 9;
