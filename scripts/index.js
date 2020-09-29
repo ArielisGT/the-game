@@ -1,17 +1,17 @@
 //Nueva lógica
 //Crear objetos paddles y pelota
-const paddle01 = {
+/* const paddle01 = {
   width: 4,
   height: 1,
-  x: 0,
-  y: 0,
+  x: 200,
+  y: 50,
   speed: 1,
 }
 const paddle02 = {
   width: 4,
   height: 1,
-  x: 0,
-  y: 0,
+  x: 200,
+  y: 750,
   speed: 1,
 };
 const ball = {
@@ -21,8 +21,11 @@ const ball = {
   y: 200,
   speed: 1,
 };
-
-
+const fieldGame = {
+  width: 400 ,
+  height: 800,
+  }
+ */
 
 //Lógica anterior
 // Definir celdas del field
@@ -49,6 +52,7 @@ const player02 = document.querySelector('.paddle02');
 let paddlePosition01 = 4;
 let paddlePosition02 = 95;
 let ballPosition = 54;
+
 const addPlayer01 = (index) => units[index].classList.add('paddle01');
 const removePlayer01 = (index) => units[index].classList.remove('paddle01');
 const addPlayer02 = (index) => units[index].classList.add('paddle02');
@@ -57,81 +61,18 @@ const addBall = (index) => units[index].classList.add('ball');
 const removeBall = (index) => units[index].classList.remove('ball');
 const moveFwBall = (index) => units[index].classList.add('move-fw');
 const removeFwBall = (index) => units[index].classList.remove('move-fw');
+//Definimos una funcion para que la pelota se mueva sola
+const timer = setInterval((event) => {
+  event = moveFwBall(ballPosition); 
+}, Infinity);
+
 
 //Definimos una función para que evalue si se puede seguir moviendo la bola
-const blockBall = (position) => {
-  if (units.includes(position)) {
-    return false;
-  } else {
-    return true;
-  }
-};
 
 addBall(ballPosition);
 addPlayer01(paddlePosition01);
 addPlayer02(paddlePosition02);
-
-/*     case 'ArrowLeft':
-      if (x > 0) {
-        // calculo nueva posicion
-        const newPosition = pacmanPosition - 1;
-        // evaluo si me puedo mover a esa posicion
-        if (canImove(newPosition)) {
-          // si me puedo mover a esa posicion me muevo
-          pacmanPosition = newPosition;
-        }
-      }
-      break; */
-
-const spacePress = (event) => {
-  const { key } = event;
-  const yBall = Math.floor(ballPosition / 10);
-
-  if (yBall > 0) {
-    removeBall(ballPosition);
-    removeFwBall(ballPosition);
-    const newPosition = ballPosition + 10;
-    if (blockBall(newPosition)) {
-      ballPosition = newPosition;
-      moveFwBall(newPosition);
-    }
-  }
-}; /*   if (yBall > 0) {
-    moveFwBall(ballPosition);
-  } else if (yBall > 99) {
-    moveBwBall(ballPosition);
-  }
- */ /*   if (yBall > 0) {
-    ballPosition = ballPosition + 10;
-    addBall(ballPosition);
-  } else {
-    ballPosition = ballPosition;
-  }
- */ //Definimos una función para que evalue si se puede seguir moviendo la bola
-
-/*   units.forEach(element => {
-    
-    if (yBall > 0) {
-      const newPosition = ballPosition + 1;
-      addBall(ballPosition);
-    }
-   });
- */ /* const blockBall = (position) => {
-  if (units.includes(position)) {
-    return false;
-  } else {
-    return true;
-  }
-}; */
-/* const moveBall = (position) => {
-  if (ballPosition > 0) {
-    const newPosition = ballPosition + 1;
-    if (blockBall(newPosition)) {
-      ballPosition = newPosition;
-    }
-  }
-  moveBall(ballPosition);
-}; */
+timer();
 
 const handleKeyPress = (event) => {
   const { key } = event;
@@ -184,5 +125,8 @@ const handleKeyPress = (event) => {
   addPlayer02(paddlePosition02);
 };
 
-window.addEventListener('keydown', spacePress);
+
+
+
+window.addEventListener('load', timer(ballPosition));
 window.addEventListener('keydown', handleKeyPress);
