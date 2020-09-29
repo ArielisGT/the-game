@@ -82,7 +82,7 @@ picture {
 }
 .cell {
   width: 2vw;
-  height: 3vw;
+  height: 4vw;
   border: 1px solid rgba(255, 255, 255, 0.5);
   color: white;
   font-size: 0.5rem;
@@ -93,18 +93,35 @@ picture {
   height: 1vw;
   border-radius: 50%;
   background-color: yellow;
-  position: absolute;
 }
+/* .move-fw {
+  width: 1vw;
+  height: 1vw;
+  border-radius: 50%;
+  background-color: yellow;
+  transform: translateY(20vw);
+  transition: linear 2s;
+}
+ */
+.move-bw {
+  width: 1vw;
+  height: 1vw;
+  border-radius: 50%;
+  background-color: yellow;
+  transition: linear 1s;
+  transform: translateY(-1vw);
+}
+
 .paddle01 {
   width: 2vw;
-  height: 1vw;
+  height: 4vw;
   border-radius: 2px;
   background-color: rgb(5, 145, 35);
   top: 5%;
 }
 .paddle02 {
   width: 2vw;
-  height: 1vw;
+  height: 4vw;
   border-radius: 2px;
   background-color: rgb(189, 115, 5);
   bottom: 2.5%;
