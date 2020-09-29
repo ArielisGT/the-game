@@ -42,17 +42,13 @@ for (let index = 0; index < area; index++) {
   field.appendChild(cell);
   units.push(cell);
 }
-//- Setear teclas de movimiento de paddles
-//Selecciono el paddle del jugador 01
-/* const player01 = document.querySelector('.paddle01');
-const player02 = document.querySelector('.paddle02');
- */
+//Posiciones iniciales de los elementos.
 let paddlePosition01 = 4;
-let paddlePosition02 = 95;
+let paddlePosition02 = 94;
 let ballPosition = 54;
 let scorePlayer01 = 0;
 let scorePlayer02 = 0;
-
+//Agrego los elementos a la pantalla.
 const addPlayer01 = (index) => units[index].classList.add('paddle01');
 const removePlayer01 = (index) => units[index].classList.remove('paddle01');
 const addPlayer02 = (index) => units[index].classList.add('paddle02');
@@ -65,26 +61,37 @@ const addBall = (index) => {
 };
 const removeBall = (index) => units[index].classList.remove('ball');
 
-let countTimer;
-let ballDirection = 'forwards';
 //array de opciones de angulo de bola.
-const ballAngleOptions = ['-x', '0', '+x'];
-let ballAngle = '0';
+const ballAngleOptions = [-1, 0, 1];
+let ballAngle = 0;
+
+//Dirección de la bola
+let ballDirection = 'forwards';
+
+//Funcion mover bola
+function moveForwards() {
+  if (ballPosition > 0 || ballPosition < 90) {
+    removeBall(ballPosition);
+    ballPosition = ballPosition + 10;
+    addBall(ballPosition);
+  }
+}
+function moveBackwards() {
+  if (ballPosition > 10 || ballPosition < 90) {
+    removeBall(ballPosition);
+    ballPosition = ballPosition - 10;
+    addBall(ballPosition);
+  }
+}
 
 function movingBall() {
   let key = ballAngle;
 
   switch (key) {
-    case '0':
+    case 0:
       if (ballDirection === 'forwards') {
-        if (ballPosition > 0 || ballPosition < 90) {
-          removeBall(ballPosition);
-          ballPosition = ballPosition + 10;
-          addBall(ballPosition);
-        }
+        moveForwards();
         if (ballPosition === paddlePosition02) {
-          console.log(ballPosition);
-          console.log(paddlePosition02);
           ballDirection = 'backwards';
           removeBall(ballPosition);
           ballPosition = ballPosition - 10;
@@ -97,14 +104,8 @@ function movingBall() {
         }
       }
       if (ballDirection === 'backwards') {
-        if (ballPosition > 10 || ballPosition < 90) {
-          removeBall(ballPosition);
-          ballPosition = ballPosition - 10;
-          addBall(ballPosition);
-        }
+        moveBackwards();
         if (ballPosition === paddlePosition01) {
-          console.log(ballPosition);
-          console.log(paddlePosition01);
           ballDirection = 'forwards';
           removeBall(ballPosition);
           ballPosition = ballPosition + 10;
@@ -117,19 +118,48 @@ function movingBall() {
         }
       }
       break;
-    case '-x':
+    case -1:
       if (ballDirection === 'forwards') {
-        if (ballPosition > 0 || ballPosition < 90) {
-          removeBall(ballPosition);
-          ballPosition = ballPosition + 10;
-          addBall(ballPosition);
-        }
+        moveForwards();
         if (ballPosition === paddlePosition02) {
-          console.log(ballPosition);
-          console.log(paddlePosition02);
+          ballAngle = -1;
           ballDirection = 'backwards';
           removeBall(ballPosition);
-          ballPosition = ballPosition - 10;
+          ballPosition = ballPosition - 11;
+          console.log(ballPosition);
+          addBall(ballPosition);
+          
+        }
+        if (ballPosition >= 90) {
+          removeBall(ballPosition);
+          scorePlayer01++;
+          clearInterval(countTimer);
+        }
+      }
+      if (ballDirection === 'backwards') {
+        moveBackwards();
+        if (ballPosition === paddlePosition01) {
+          ballDirection = 'forwards';
+          removeBall(ballPosition);
+          ballPosition = ballPosition + 9;
+          addBall(ballPosition);
+        }
+        if (ballPosition <= 10) {
+          removeBall(ballPosition);
+          scorePlayer02++;
+          clearInterval(countTimer);
+        }
+      }
+      break;
+    case 1:
+      if (ballDirection === 'forwards') {
+        moveForwards();
+        if (ballPosition === paddlePosition02) {
+          ballAngle = + 1;
+          ballDirection = 'backwards';
+          removeBall(ballPosition);
+          ballPosition = ballPosition - 9;
+          console.log(ballPosition);
           addBall(ballPosition);
         }
         if (ballPosition >= 90) {
@@ -139,17 +169,11 @@ function movingBall() {
         }
       }
       if (ballDirection === 'backwards') {
-        if (ballPosition > 10 || ballPosition < 90) {
-          removeBall(ballPosition);
-          ballPosition = ballPosition - 10;
-          addBall(ballPosition);
-        }
+        moveBackwards();
         if (ballPosition === paddlePosition01) {
-          console.log(ballPosition);
-          console.log(paddlePosition01);
           ballDirection = 'forwards';
           removeBall(ballPosition);
-          ballPosition = ballPosition + 10;
+          ballPosition = ballPosition + 11;
           addBall(ballPosition);
         }
         if (ballPosition <= 10) {
@@ -158,13 +182,12 @@ function movingBall() {
           clearInterval(countTimer);
         }
       }
-      break;
-    case '+x':
       break;
     default:
       break;
   }
 }
+let countTimer;
 function timer() {
   addBall(ballPosition);
   countTimer = setInterval(movingBall, 300);
