@@ -266,3 +266,13 @@ const handleKeyPress = (event) => {
 
 window.addEventListener('keydown', handleKeyPress);
 window.addEventListener('dblclick', timer);
+
+// Para saber que la bola esta tocando el borde izquierdo tenemos que:
+// Calcular el valor de X en el eje cartesiano
+// const x = ballPosition % width;
+// Para saber que esta en el borde izquierdo
+// x === 0
+
+// Para saber que la bola esta tocando el borde derecho tenemos que:
+
+// !(x < width -1)
