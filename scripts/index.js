@@ -1,11 +1,10 @@
 // Definir celdas del field
-
 const width = 10;
 const height = 10;
 const area = width * height;
 const field = document.querySelector('.field');
 const units = [];
-
+//Creo el array de celdas.
 for (let index = 0; index < area; index++) {
   const cell = document.createElement('div');
   cell.innerText = index;
@@ -14,9 +13,9 @@ for (let index = 0; index < area; index++) {
   units.push(cell);
 }
 //Posiciones iniciales de los elementos.
-let paddlePosition01 = 4;
-let paddlePosition02 = 94;
-let ballPosition = 54;
+let paddlePosition01 = 5;
+let paddlePosition02 = 95;
+let ballPosition = 55;
 let scorePlayer01 = 0;
 let scorePlayer02 = 0;
 //Agrego los elementos a la pantalla.
@@ -24,13 +23,9 @@ const addPlayer01 = (index) => units[index].classList.add('paddle01');
 const removePlayer01 = (index) => units[index].classList.remove('paddle01');
 const addPlayer02 = (index) => units[index].classList.add('paddle02');
 const removePlayer02 = (index) => units[index].classList.remove('paddle02');
-
 //Funciones para la bola
 const addBall = (index) => units[index].classList.add('ball');
 const removeBall = (index) => units[index].classList.remove('ball');
-
-//Funcion mover bola
-
 // Para saber que la bola esta tocando el borde izquierdo tenemos que:
 // Calcular el valor de X en el eje cartesiano
 // const x = ballPosition % width;
@@ -52,39 +47,38 @@ const removeBall = (index) => units[index].classList.remove('ball');
     } 
 }
  */
-//Dirección de la bola
+//Variables de dirección de la bola
+let ballDirection = 'forwards';
+let directionValue = 10;
+//Mueve la bola adelante
+function ballForwards() {
+  if ((ballPosition > 0 || ballPosition < 90) && ballDirection === 'forwards') {
+    removeBall(ballPosition);
+    ballPosition = ballPosition + directionValue;
+    addBall(ballPosition);
+  }
+}
+//Mueve la bola hacia atras
+function ballBackwards() {
+  if ((ballPosition > 10 || ballPosition < 90) && ballDirection === 'backwards') {
+    removeBall(ballPosition);
+    ballPosition = ballPosition - directionValue;
+    addBall(ballPosition);
+  }
+}
+//Funcion mover bola
 //array de opciones de angulo de bola.
 const ballAngleOptions = [0, 1, 2];
-let ballAngle = 0;  //Math.floor(Math.random() * 3);
-console.log(ballAngle);
-let ballDirection = 'forwards';
-
-  //Mueve la bola adelante
-  function ballForwards() {
-    if ((ballPosition > 0 || ballPosition < 90) && ballDirection === 'forwards') {
-      removeBall(ballPosition);
-      ballPosition = ballPosition + 10;
-      addBall(ballPosition);
-    }
-  }
-  //Mueve la bola hacia atras
-  function ballBackwards() {
-    if ((ballPosition > 10 || ballPosition < 90) && ballDirection === 'backwards') {
-      removeBall(ballPosition);
-      ballPosition = ballPosition - 10;
-      addBall(ballPosition);
-    }
-  }
-
+let ballAngle = 1;  //Math.floor(Math.random() * 3);
 
 function movingBall() {
   let key = ballAngle;
-  let directionValue = 10;
+  
 
   switch (key) {
     case 0:
-      directionValue = 10;
-      if (ballDirection === 'forwards') {
+    directionValue = 10;
+    if (ballDirection === 'forwards') {
           ballForwards();
         if (ballPosition === paddlePosition02) {
           ballDirection = 'backwards';
@@ -112,8 +106,9 @@ function movingBall() {
     case 1:
       directionValue = 9;
       if (ballDirection === 'forwards') {
-        ballForwards();
+          ballForwards();
         if (ballPosition === paddlePosition02) {
+          ballDirection = 'backwards';
           ballBackwards();
         }
         if (ballPosition >= 90) {
@@ -125,6 +120,7 @@ function movingBall() {
       if (ballDirection === 'backwards') {
         ballBackwards();
         if (ballPosition === paddlePosition01) {
+          ballDirection = 'forwards';
           ballForwards();
         }
         if (ballPosition <= 10) {
@@ -137,8 +133,9 @@ function movingBall() {
     case 2:
       directionValue = 11;
       if (ballDirection === 'forwards') {
-        ballForwards();
+          ballForwards();
         if (ballPosition === paddlePosition02) {
+          ballDirection = 'backwards';
           ballBackwards();
         }
         if (ballPosition >= 90) {
@@ -150,6 +147,7 @@ function movingBall() {
       if (ballDirection === 'backwards') {
         ballBackwards();
         if (ballPosition === paddlePosition01) {
+          ballDirection = 'forwards';
           ballForwards();
         }
         if (ballPosition <= 10) {
