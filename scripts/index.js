@@ -69,17 +69,46 @@ let ballAngle = 0;
 let ballDirection = 'forwards';
 
 //Funcion mover bola
-function moveForwards() {
+function moveForwardsZero() {
   if (ballPosition > 0 || ballPosition < 90) {
     removeBall(ballPosition);
     ballPosition = ballPosition + 10;
     addBall(ballPosition);
   }
 }
-function moveBackwards() {
+function moveForwardsMinus() {
+  if (ballPosition > 0 || ballPosition < 90) {
+    removeBall(ballPosition);
+    ballPosition = ballPosition + 9;
+    addBall(ballPosition);
+  }
+}
+function moveForwardsPlus() {
+  if (ballPosition > 0 || ballPosition < 90) {
+    removeBall(ballPosition);
+    ballPosition = ballPosition + 11;
+    addBall(ballPosition);
+  }
+}
+
+function moveBackwardsZero() {
   if (ballPosition > 10 || ballPosition < 90) {
     removeBall(ballPosition);
     ballPosition = ballPosition - 10;
+    addBall(ballPosition);
+  }
+}
+function moveBackwardsMinus() {
+  if (ballPosition > 10 || ballPosition < 90) {
+    removeBall(ballPosition);
+    ballPosition = ballPosition - 11;
+    addBall(ballPosition);
+  }
+}
+function moveBackwardsPlus() {
+  if (ballPosition > 10 || ballPosition < 90) {
+    removeBall(ballPosition);
+    ballPosition = ballPosition - 9;
     addBall(ballPosition);
   }
 }
@@ -90,7 +119,7 @@ function movingBall() {
   switch (key) {
     case 0:
       if (ballDirection === 'forwards') {
-        moveForwards();
+        moveForwardsZero();
         if (ballPosition === paddlePosition02) {
           ballDirection = 'backwards';
           removeBall(ballPosition);
@@ -104,7 +133,7 @@ function movingBall() {
         }
       }
       if (ballDirection === 'backwards') {
-        moveBackwards();
+        moveBackwardsZero();
         if (ballPosition === paddlePosition01) {
           ballDirection = 'forwards';
           removeBall(ballPosition);
@@ -120,7 +149,7 @@ function movingBall() {
       break;
     case -1:
       if (ballDirection === 'forwards') {
-        moveForwards();
+        moveForwardsMinus();
         if (ballPosition === paddlePosition02) {
           ballAngle = -1;
           ballDirection = 'backwards';
