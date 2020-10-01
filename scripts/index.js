@@ -15,8 +15,6 @@ for (let index = 0; index < area; index++) {
 let paddlePosition01 = 4;
 let paddlePosition02 = 95;
 let ballPosition = 55;
-let scorePlayer01 = 0;
-let scorePlayer02 = 0;
 //Agrego los elementos a la pantalla.
 const addPlayer01 = (index) => units[index].classList.add('paddle01');
 const removePlayer01 = (index) => units[index].classList.remove('paddle01');
@@ -26,8 +24,47 @@ const removePlayer02 = (index) => units[index].classList.remove('paddle02');
 const addBall = (index) => units[index].classList.add('ball');
 const removeBall = (index) => units[index].classList.remove('ball');
 
+//Funciones de score:
+let scorePlayer01 = 0;
+let scorePlayer02 = 0;
+let matchResult = false;
+//Player 01:
+const addScore = document.querySelector('.score');
+const addScorePlayer01 = (score) => {
+  const counter01 = document.createElement('h2');
+  counter01.innerText = `${scorePlayer01}`;
+  counter01.classList.add('counter01');
+  addScore.appendChild(counter01);
+}
+const removeScorePlayer01 = (score) =>  counter01.classList.remove('counter01');
+
+//Player 02:
+const addScorePlayer02 = (score) => {
+  const counter02 = document.createElement('h2');
+  counter02.innerText = `${scorePlayer02}`;
+  counter02.classList.add('counter02');
+  addScore.appendChild(counter02);
+}
+const removeScorePlayer02 = (score) => counter02.classList.remove('counter02');
+
 //Funciones de reset:
 function nextPoint() {
+  ballPosition = 55;
+  removePlayer01(paddlePosition01);
+  removePlayer02(paddlePosition02);
+  paddlePosition01 = 4;
+  paddlePosition02 = 95;
+  addPlayer01(paddlePosition01);
+  addPlayer02(paddlePosition02);
+  ballDirection = 'forwards';
+  directionValue = 10;
+  ballAngle = 0;
+/*   removeScorePlayer01(scorePlayer01);
+  removeScorePlayer02(scorePlayer02);
+ */addScorePlayer01(scorePlayer01);
+  addScorePlayer02(scorePlayer02);
+  }
+function resetGame() {
   ballPosition = 55;
   removePlayer01(paddlePosition01);
   removePlayer02(paddlePosition02);
@@ -38,7 +75,11 @@ function nextPoint() {
   ballDirection = 'forwards';
   directionValue = 10;
   ballAngle = 0;
+  scorePlayer01 = 0;
+  scorePlayer02 = 0;
+  matchresult = false;
 }
+
 //Funcion mover bola
 let ballDirection = 'forwards';
 let directionValue = 10;
@@ -130,13 +171,13 @@ function movingBall() {
       }
       if (ballPosition >= 90) {
         removeBall(ballPosition);
-        scorePlayer01++;
+        scorePlayer01 = scorePlayer01 + 1;
         nextPoint();
         clearInterval(countTimer);
       }
       if (ballPosition <= 10) {
         removeBall(ballPosition);
-        scorePlayer02++;
+        scorePlayer02 = scorePlayer02 + 1;
         nextPoint();
         clearInterval(countTimer);
       }
@@ -176,13 +217,13 @@ function movingBall() {
       }
       if (ballPosition >= 90) {
         removeBall(ballPosition);
-        scorePlayer01++;
+        scorePlayer01 = scorePlayer01 + 1;
         nextPoint();
         clearInterval(countTimer);
       }
       if (ballPosition <= 10) {
         removeBall(ballPosition);
-        scorePlayer02++;
+        scorePlayer02 = scorePlayer02 + 1;
         nextPoint();
         clearInterval(countTimer);
       }
@@ -222,13 +263,13 @@ function movingBall() {
       }
       if (ballPosition >= 90) {
         removeBall(ballPosition);
-        scorePlayer01++;
+        scorePlayer01 = scorePlayer01 + 1;
         nextPoint();
         clearInterval(countTimer);
       }
       if (ballPosition <= 10) {
         removeBall(ballPosition);
-        scorePlayer02++;
+        scorePlayer02 = scorePlayer02 + 1;
         nextPoint();
         clearInterval(countTimer);
       }
@@ -237,13 +278,25 @@ function movingBall() {
       break;
   }
 }
+//Funciones de tiempo:
 let countTimer;
 function timer() {
   addBall(ballPosition);
-  countTimer = setInterval(movingBall, 500);
+  countTimer = setInterval(movingBall, 400);
 }
+
+//Funcion de resultado del juego:
+
+function showWinner() {
+  if (scorePlayer01 === 11 || scorePlayer02 === 11) {
+    matchresult = true;
+    
+  }
+}
+
 addPlayer01(paddlePosition01);
 addPlayer02(paddlePosition02);
+//Funciones de control de paddles:
 const handleKeyPress = (event) => {
   const { key } = event;
   console.log(event);
