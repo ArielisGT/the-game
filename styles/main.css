@@ -78,8 +78,7 @@ picture {
 .cell {
   width: 2vw;
   height: 3vw;
-  border: 1px solid rgba(0, 0, 0, 0.5);
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0);
   margin: 0 auto;
 }
 .ball {
@@ -92,7 +91,7 @@ picture {
   width: 2vw;
   height: 3vw;
   border-radius: 2px;
-  border-bottom:1vw solid rgb(5, 145, 35);
+  border-bottom: 1vw solid rgb(5, 145, 35);
   top: 5%;
 }
 .paddle02 {
