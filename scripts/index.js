@@ -16,7 +16,7 @@ for (let index = 0; index < area; index++) {
 //Posiciones iniciales de los elementos.
 let paddlePosition01 = 4;
 let paddlePosition02 = 94;
-let ballPosition = 54;
+let ballPosition = 55;
 let scorePlayer01 = 0;
 let scorePlayer02 = 0;
 //Agrego los elementos a la pantalla.
@@ -31,6 +31,27 @@ const removeBall = (index) => units[index].classList.remove('ball');
 
 //Funcion mover bola
 
+let ballDirection = 'forwards';
+let directionValue = 10;
+//Mueve la bola adelante
+function ballForwards() {
+  if ((ballPosition > 0 || ballPosition < 90) && ballDirection === 'forwards') {
+    removeBall(ballPosition);
+    ballPosition = ballPosition + directionValue;
+    addBall(ballPosition);
+  }
+}
+//Mueve la bola hacia atras
+function ballBackwards() {
+  if (
+    (ballPosition > 10 || ballPosition < 90) &&
+    ballDirection === 'backwards'
+  ) {
+    removeBall(ballPosition);
+    ballPosition = ballPosition - directionValue;
+    addBall(ballPosition);
+  }
+}
 // Para saber que la bola esta tocando el borde izquierdo tenemos que:
 // Calcular el valor de X en el eje cartesiano
 // const x = ballPosition % width;
@@ -40,54 +61,59 @@ const removeBall = (index) => units[index].classList.remove('ball');
 // Para saber que la bola esta tocando el borde derecho tenemos que:
 
 // !(x < width -1)
-/* function wallLeft() {
-  const x = ballPosition % width;
-  if (x === 0) {
-    if (ballDirection === 'forwards') {
-        moveForwardsPlus();
-    } else {
-      moveBackwardsPlus();
-      }
-      
-    } 
-}
- */
+
 //Dirección de la bola
 //array de opciones de angulo de bola.
-const ballAngleOptions = [0, 1, 2];
-let ballAngle = 0;  //Math.floor(Math.random() * 3);
-console.log(ballAngle);
-let ballDirection = 'forwards';
+const x = ballPosition % width;
 
-  //Mueve la bola adelante
-  function ballForwards() {
-    if ((ballPosition > 0 || ballPosition < 90) && ballDirection === 'forwards') {
-      removeBall(ballPosition);
-      ballPosition = ballPosition + 10;
-      addBall(ballPosition);
+function wallLeft() {
+  if (x === 0) {
+    if (ballDirection === 'forwards') {
+      directionValue = 11;
+      ballForwards();
+    } else if (ballDirection === 'backwards') {
+      directionValue = 11;
+      ballBackwards();
     }
   }
-  //Mueve la bola hacia atras
-  function ballBackwards() {
-    if ((ballPosition > 10 || ballPosition < 90) && ballDirection === 'backwards') {
-      removeBall(ballPosition);
-      ballPosition = ballPosition - 10;
-      addBall(ballPosition);
+}
+function wallRight() {
+  if (!(x < width - 1)) {
+    if (ballDirection === 'forwards') {
+      directionValue = 1;
+      ballForwards();
+    } else if (ballDirection === 'backwards') {
+      directionValue = 1;
+      ballBackwards();
     }
-  }
-
+ }
+}
 
 function movingBall() {
-  let key = ballAngle;
-  let directionValue = 10;
+  const ballAngleOptions = [0, 1, 2];
+  let ballAngle = 0; 
 
-  switch (key) {
+
+  wallLeft();
+  wallRight();
+  console.log(ballAngle);
+  console.log(directionValue);
+
+
+  switch (ballAngle) {
     case 0:
-      directionValue = 10;
+      /*       if (x === 0) {
+        wallLeft();
+      } else if (!(x < width - 1)) {
+        wallRight();
+      } else { */
       if (ballDirection === 'forwards') {
-          ballForwards();
+        directionValue = 10;
+        ballForwards();
         if (ballPosition === paddlePosition02) {
+          ballAngle = Math.floor(Math.random(ballAngleOptions) * 3);
           ballDirection = 'backwards';
+          // debugger;
           ballBackwards();
         }
         if (ballPosition >= 90) {
@@ -97,8 +123,10 @@ function movingBall() {
         }
       }
       if (ballDirection === 'backwards') {
+        directionValue = 10;
         ballBackwards();
         if (ballPosition === paddlePosition01) {
+          ballAngle = Math.floor(Math.random(ballAngleOptions) * 3);
           ballDirection = 'forwards';
           ballForwards();
         }
@@ -108,6 +136,7 @@ function movingBall() {
           clearInterval(countTimer);
         }
       }
+      // }
       break;
     case 1:
       directionValue = 9;

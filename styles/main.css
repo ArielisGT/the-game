@@ -103,7 +103,7 @@ picture {
   transition: linear 2s;
 }
  */
-.move-bw {
+/* .move-bw {
   width: 1vw;
   height: 1vw;
   border-radius: 50%;
@@ -111,7 +111,7 @@ picture {
   transition: linear 1s;
   transform: translateY(-1vw);
 }
-
+ */
 .paddle01 {
   width: 2vw;
   height: 4vw;
