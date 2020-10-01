@@ -13,7 +13,7 @@ for (let index = 0; index < area; index++) {
 }
 //Posiciones iniciales de los elementos.
 let paddlePosition01 = 4;
-let paddlePosition02 = 94;
+let paddlePosition02 = 95;
 let ballPosition = 55;
 let scorePlayer01 = 0;
 let scorePlayer02 = 0;
@@ -25,6 +25,20 @@ const removePlayer02 = (index) => units[index].classList.remove('paddle02');
 //Funciones para la bola
 const addBall = (index) => units[index].classList.add('ball');
 const removeBall = (index) => units[index].classList.remove('ball');
+
+//Funciones de reset:
+function nextPoint() {
+  ballPosition = 55;
+  removePlayer01(paddlePosition01);
+  removePlayer02(paddlePosition02);
+  paddlePosition01 = 4;
+  paddlePosition02 = 94;
+  addPlayer01(paddlePosition01);
+  addPlayer02(paddlePosition02);
+  ballDirection = 'forwards';
+  directionValue = 10;
+  ballAngle = 0;
+}
 //Funcion mover bola
 let ballDirection = 'forwards';
 let directionValue = 10;
@@ -117,11 +131,13 @@ function movingBall() {
       if (ballPosition >= 90) {
         removeBall(ballPosition);
         scorePlayer01++;
+        nextPoint();
         clearInterval(countTimer);
       }
       if (ballPosition <= 10) {
         removeBall(ballPosition);
         scorePlayer02++;
+        nextPoint();
         clearInterval(countTimer);
       }
       break;
@@ -161,11 +177,13 @@ function movingBall() {
       if (ballPosition >= 90) {
         removeBall(ballPosition);
         scorePlayer01++;
+        nextPoint();
         clearInterval(countTimer);
       }
       if (ballPosition <= 10) {
         removeBall(ballPosition);
         scorePlayer02++;
+        nextPoint();
         clearInterval(countTimer);
       }
       break;
@@ -205,11 +223,13 @@ function movingBall() {
       if (ballPosition >= 90) {
         removeBall(ballPosition);
         scorePlayer01++;
+        nextPoint();
         clearInterval(countTimer);
       }
       if (ballPosition <= 10) {
         removeBall(ballPosition);
         scorePlayer02++;
+        nextPoint();
         clearInterval(countTimer);
       }
       break;
