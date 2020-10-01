@@ -33,6 +33,7 @@ const removeBall = (index) => units[index].classList.remove('ball');
 
 let ballDirection = 'forwards';
 let directionValue = 10;
+let x = ballPosition % width;
 //Mueve la bola adelante
 function ballForwards() {
   if ((ballPosition > 0 || ballPosition < 90) && ballDirection === 'forwards') {
@@ -52,6 +53,33 @@ function ballBackwards() {
     addBall(ballPosition);
   }
 }
+
+function wallLeft() {
+  x = console.log(x);
+  if (x === 0) {
+    if (ballDirection === 'forwards') {
+      console.log('reached wall left');
+     //directionValue = 11;
+      ballAngle = 2;
+    } else if (ballDirection === 'backwards') {
+      //directionValue = 9;
+      ballAngle = 2;
+    }
+  }
+}
+function wallRight() {
+  let x = ballPosition % width;
+  if (!(x < width - 1)) {
+    if (ballDirection === 'forwards') {
+      console.log('reached wall right');
+      ballAngle = 1;
+      //directionValue = 9;
+    } else if (ballDirection === 'backwards') {
+      ballAngle = 1;
+     //directionValue = 11;
+    }
+ }
+}
 // Para saber que la bola esta tocando el borde izquierdo tenemos que:
 // Calcular el valor de X en el eje cartesiano
 // const x = ballPosition % width;
@@ -64,81 +92,97 @@ function ballBackwards() {
 
 //Dirección de la bola
 //array de opciones de angulo de bola.
-const x = ballPosition % width;
-
-function wallLeft() {
-  if (x === 0) {
-    if (ballDirection === 'forwards') {
-      directionValue = 11;
-      ballForwards();
-    } else if (ballDirection === 'backwards') {
-      directionValue = 11;
-      ballBackwards();
-    }
-  }
-}
-function wallRight() {
-  if (!(x < width - 1)) {
-    if (ballDirection === 'forwards') {
-      directionValue = 1;
-      ballForwards();
-    } else if (ballDirection === 'backwards') {
-      directionValue = 1;
-      ballBackwards();
-    }
- }
-}
+const ballAngleOptions = [0, 1, 2];
+let ballAngle = 0;
 
 function movingBall() {
-  const ballAngleOptions = [0, 1, 2];
-  let ballAngle = 0; 
-
-
-  wallLeft();
-  wallRight();
-  console.log(ballAngle);
-  console.log(directionValue);
-
-
+  //Creamos un switch con los casos de cambio de dirección de la bola:
   switch (ballAngle) {
     case 0:
-      /*       if (x === 0) {
-        wallLeft();
-      } else if (!(x < width - 1)) {
-        wallRight();
-      } else { */
       if (ballDirection === 'forwards') {
         directionValue = 10;
         ballForwards();
-        if (ballPosition === paddlePosition02) {
-          ballAngle = Math.floor(Math.random(ballAngleOptions) * 3);
-          ballDirection = 'backwards';
-          // debugger;
-          ballBackwards();
-        }
-        if (ballPosition >= 90) {
-          removeBall(ballPosition);
-          scorePlayer01++;
-          clearInterval(countTimer);
+        if (x === 0) {
+          console.log('reached wall left');
+          wallLeft();
+        } else if (!(x < width - 1)) {
+          console.log('reached wall right');
+          wallRight();
         }
       }
       if (ballDirection === 'backwards') {
         directionValue = 10;
         ballBackwards();
-        if (ballPosition === paddlePosition01) {
-          ballAngle = Math.floor(Math.random(ballAngleOptions) * 3);
-          ballDirection = 'forwards';
-          ballForwards();
-        }
-        if (ballPosition <= 10) {
-          removeBall(ballPosition);
-          scorePlayer02++;
-          clearInterval(countTimer);
+        if (x === 0) {
+          wallLeft();
+        } else if (!(x < width - 1)) {
+          wallRight();
         }
       }
-      // }
+      if (ballPosition === paddlePosition02) {
+        ballAngle = Math.floor(Math.random(ballAngleOptions) * 3);
+        ballDirection = 'backwards';
+        ballBackwards();
+      }
+      if (ballPosition === paddlePosition01) {
+        ballAngle = Math.floor(Math.random(ballAngleOptions) * 3);
+        ballDirection = 'forwards';
+        ballForwards();
+      }
+      if (ballPosition >= 90) {
+        removeBall(ballPosition);
+        scorePlayer01++;
+        clearInterval(countTimer);
+      }
+      if (ballPosition <= 10) {
+        removeBall(ballPosition);
+        scorePlayer02++;
+        clearInterval(countTimer);
+      }
       break;
     case 1:
+      if (ballDirection === 'forwards') {
+        directionValue = 9;
+        ballForwards();
+        if (x === 0) {
+          console.log('reached wall left');
+          wallLeft();
+        } else if (!(x < width - 1)) {
+          console.log('reached wall right');
+          wallRight();
+        }
+      }
+      if (ballDirection === 'backwards') {
+        directionValue = 9;
+        ballBackwards();
+        if (x === 0) {
+          wallLeft();
+        } else if (!(x < width - 1)) {
+          wallRight();
+        }
+      }
+      if (ballPosition === paddlePosition02) {
+        ballAngle = Math.floor(Math.random(ballAngleOptions) * 3);
+        ballDirection = 'backwards';
+        ballBackwards();
+      }
+      if (ballPosition === paddlePosition01) {
+        ballAngle = Math.floor(Math.random(ballAngleOptions) * 3);
+        ballDirection = 'forwards';
+        ballForwards();
+      }
+      if (ballPosition >= 90) {
+        removeBall(ballPosition);
+        scorePlayer01++;
+        clearInterval(countTimer);
+      }
+      if (ballPosition <= 10) {
+        removeBall(ballPosition);
+        scorePlayer02++;
+        clearInterval(countTimer);
+      }
+      break;
+    /*     case 1:
       directionValue = 9;
       if (ballDirection === 'forwards') {
         ballForwards();
@@ -163,7 +207,7 @@ function movingBall() {
         }
       }
       break;
-    case 2:
+ */ case 2:
       directionValue = 11;
       if (ballDirection === 'forwards') {
         ballForwards();
