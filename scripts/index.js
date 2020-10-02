@@ -27,27 +27,50 @@ const removeBall = (index) => units[index].classList.remove('ball');
 //Funciones de score:
 let scorePlayer01 = 0;
 let scorePlayer02 = 0;
+let winner01 = '';
+let winner02 = '';
 let matchResult = false;
 //Player 01:
-const addScore = document.querySelector('.score');
-const addScorePlayer01 = (score) => {
-  const counter01 = document.createElement('h2');
+const divScore = document.querySelector('.score');
+const divPlayers = document.querySelector('.players');
+const counter01 = document.querySelector('.counter01');
+const counter02 = document.querySelector('.counter02');
+
+const addScorePlayer01 = () => {
   counter01.innerText = `${scorePlayer01}`;
-  counter01.classList.add('counter01');
-  addScore.appendChild(counter01);
 }
-const removeScorePlayer01 = (score) =>  counter01.classList.remove('counter01');
-
 //Player 02:
-const addScorePlayer02 = (score) => {
-  const counter02 = document.createElement('h2');
+const addScorePlayer02 = () => {
   counter02.innerText = `${scorePlayer02}`;
-  counter02.classList.add('counter02');
-  addScore.appendChild(counter02);
+};
+//Mostrar el ganador en pantalla:
+//Winner 01:
+const addWinner01 = () => {
+  const winner01 = document.createElement('p');
+  winner01.innerText = `WINNER!`;
+  winner01.classList.add('winner01');
+  divPlayers.appendChild(winner01);
 }
-const removeScorePlayer02 = (score) => counter02.classList.remove('counter02');
 
-//Funciones de reset:
+//Winner 02:
+const addWinner02 = () => {
+  const winner02 = document.createElement('p');
+  winner02.innerText = `WINNER!`;
+  winner02.classList.add('winner02');
+  divPlayers.appendChild(winner02);
+}
+ //Funcion de resultado del juego:
+function showWinner() {
+  if (scorePlayer01 === 11) { 
+    addWinner01();
+    matchresult = true;
+  } else if (scorePlayer02 === 11) {
+    addWinner02();
+    matchresult = true;
+  }
+}
+
+ //Funciones de reset:
 function nextPoint() {
   ballPosition = 55;
   removePlayer01(paddlePosition01);
@@ -59,10 +82,9 @@ function nextPoint() {
   ballDirection = 'forwards';
   directionValue = 10;
   ballAngle = 0;
-/*   removeScorePlayer01(scorePlayer01);
-  removeScorePlayer02(scorePlayer02);
- */addScorePlayer01(scorePlayer01);
+  addScorePlayer01(scorePlayer01);
   addScorePlayer02(scorePlayer02);
+  showWinner();
   }
 function resetGame() {
   ballPosition = 55;
@@ -77,9 +99,10 @@ function resetGame() {
   ballAngle = 0;
   scorePlayer01 = 0;
   scorePlayer02 = 0;
+  winner01 = '';
+  winner02 = '';
   matchresult = false;
 }
-
 //Funcion mover bola
 let ballDirection = 'forwards';
 let directionValue = 10;
@@ -282,18 +305,9 @@ function movingBall() {
 let countTimer;
 function timer() {
   addBall(ballPosition);
-  countTimer = setInterval(movingBall, 400);
+  countTimer = setInterval(movingBall, 250);
 }
-
-//Funcion de resultado del juego:
-
-function showWinner() {
-  if (scorePlayer01 === 11 || scorePlayer02 === 11) {
-    matchresult = true;
-    
-  }
-}
-
+//Agrego los paddles a la pantalla:
 addPlayer01(paddlePosition01);
 addPlayer02(paddlePosition02);
 //Funciones de control de paddles:

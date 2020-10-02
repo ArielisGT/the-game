@@ -98,7 +98,11 @@ picture {
   width: 2vw;
   height: 3vw;
   border-radius: 2px;
+<<<<<<< HEAD
   border-top: 1vw solid rgb(13, 127, 235);
+=======
+  border-top: 1vw solid  rgb(13, 127, 235);
+>>>>>>> b07a8b7d3067d0ab8fa2f350b0c93ce0cd70f999
   bottom: 2.5%;
 }
 
@@ -119,4 +123,31 @@ picture {
 .player02,
 .counter02 {
   color:  rgb(13, 127, 235);
+<<<<<<< HEAD
+=======
+}
+.winner01 {
+  font-size: 3rem;
+  position: absolute;
+  top: 33vh;
+  color: rgb(5, 145, 35)
+}
+.winner02 {
+  font-size: 3rem;
+  position: absolute;
+  bottom: 26vh;
+  color:  rgb(13, 127, 235);
+
+>>>>>>> b07a8b7d3067d0ab8fa2f350b0c93ce0cd70f999
+}
+.reload {
+  font-size: 1rem;
+  font-weight: lighter;
+  text-align: center;
+  
+  width: 70%;
+  color: rgba(255, 255, 255, 0.7);
+  border: 1px solid ;
+  border-radius: 5px;
+  padding: 5px;
 }
