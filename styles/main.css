@@ -98,7 +98,7 @@ picture {
   width: 2vw;
   height: 3vw;
   border-radius: 2px;
-  border-top: 1vw solid rgb(189, 115, 5);
+  border-top: 1vw solid  rgb(13, 127, 235);
   bottom: 2.5%;
 }
 
@@ -118,5 +118,15 @@ picture {
 }
 .player02,
 .counter02 {
-  color: rgb(189, 115, 5);
+  color:  rgb(13, 127, 235);
+}
+.winner01 {
+  font-size: 3rem;
+  position: absolute;
+  top: 33vh;
+}
+.winner02 {
+  font-size: 3rem;
+  position: absolute;
+  bottom: 26vh;
 }
