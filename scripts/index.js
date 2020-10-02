@@ -33,25 +33,19 @@ let matchResult = false;
 //Player 01:
 const divScore = document.querySelector('.score');
 const divPlayers = document.querySelector('.players');
-const addScorePlayer01 = (score) => {
-  const counter01 = document.createElement('h2');
-  counter01.innerText = `${scorePlayer01}`;
-  counter01.classList.add('counter01');
-  divScore.appendChild(counter01);
-}
-const removeScorePlayer01 = (score) =>  counter01.classList.remove('counter01');
+const counter01 = document.querySelector('.counter01');
+const counter02 = document.querySelector('.counter02');
 
-//Player 02:
-const addScorePlayer02 = (score) => {
-  const counter02 = document.createElement('h2');
-  counter02.innerText = `${scorePlayer02}`;
-  counter02.classList.add('counter02');
-  divScore.appendChild(counter02);
+const addScorePlayer01 = () => {
+  counter01.innerText = `${scorePlayer01}`;
 }
-const removeScorePlayer02 = (score) => counter02.classList.remove('counter02');
+//Player 02:
+const addScorePlayer02 = () => {
+  counter02.innerText = `${scorePlayer02}`;
+};
 //Mostrar el ganador en pantalla:
 //Winner 01:
-const addWinner01 = (score) => {
+const addWinner01 = () => {
   const winner01 = document.createElement('p');
   winner01.innerText = `WINNER!`;
   winner01.classList.add('winner01');
@@ -59,7 +53,7 @@ const addWinner01 = (score) => {
 }
 
 //Winner 02:
-const addWinner02 = (score) => {
+const addWinner02 = () => {
   const winner02 = document.createElement('p');
   winner02.innerText = `WINNER!`;
   winner02.classList.add('winner02');
@@ -68,14 +62,14 @@ const addWinner02 = (score) => {
  //Funcion de resultado del juego:
 function showWinner() {
   if (scorePlayer01 === 11) { 
-    addWinner01(winner01);
+    addWinner01();
     matchresult = true;
   } else if (scorePlayer02 === 11) {
-    addWinner02(winner02);
+    addWinner02();
     matchresult = true;
   }
 }
-showWinner();
+
  //Funciones de reset:
 function nextPoint() {
   ballPosition = 55;
@@ -90,6 +84,7 @@ function nextPoint() {
   ballAngle = 0;
   addScorePlayer01(scorePlayer01);
   addScorePlayer02(scorePlayer02);
+  showWinner();
   }
 function resetGame() {
   ballPosition = 55;
@@ -310,7 +305,7 @@ function movingBall() {
 let countTimer;
 function timer() {
   addBall(ballPosition);
-  countTimer = setInterval(movingBall, 400);
+  countTimer = setInterval(movingBall, 250);
 }
 //Agrego los paddles a la pantalla:
 addPlayer01(paddlePosition01);
