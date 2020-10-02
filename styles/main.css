@@ -6,7 +6,7 @@ body {
   font-size: 100%;
   color: white;
   font-family: 'Saira Condensed', sans-serif;
-  background-image: url('/imgs/nebula1920x1080.jpg');
+  background-image: url('../imgs/nebula1920x1080.jpg');
   display: flex;
   flex-direction: column;
   align-items: center;
